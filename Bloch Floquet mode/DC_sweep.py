@@ -2,8 +2,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 #Results of DC sweep 
 
-def directionality(Dir = 'Up', Pup = 0, Pdown = 0):
+def directionality(Dir = 'Up', Pup = 0, Pdown = 0, xline = 0, xline_axis = "",  axis_units = "", graph_title = "Directionality"):
+    '''
+    Calculates the directionality as a numpy array. \n
 
+    Dir: STRING. Specifies the direction. Must be Either "Up" or "Down".\n
+
+    Pup: ARRAY. Power radiated to the fiber or towards the cladding obtained from simulations. 
+    Default value is 0. Can be of any type as long as it satisfies matplotlib.pyplot.\n
+
+    Pdown: Power radiated to the substrate obtained from simulations. 
+    Default value is 0. Can be of any type as long as it satisfies matplotlib.pyplot.\n
+
+    xline: ARRAY of values for x axis. Obligatory argument. Can be of any type as long as it satisfies matplotlib.pyplot.\n 
+
+    xline_axis: STRING. Title of the x axis. Default value is an empty string.\n
+
+    axis_units: STRING. Units to be displayed after axis title. Default value is an empty string.\n
+
+    graph_title: STRING. Default value is "Directionality".
+    '''
     DC = np.arange(0.1,0.96,0.05)
 
     if Dir == 'Up':
@@ -15,58 +33,117 @@ def directionality(Dir = 'Up', Pup = 0, Pdown = 0):
     
     #Plot the results in %
     plt.figure()
+    plt.plot(xline, D*100, marker='^', linewidth = 2)
 
-    plt.plot(DC, D*100, marker='^', linewidth = 2)
-
-    plt.xlabel('Duty cycle [-]')
+    #Set the axes
+    plt.xlabel(xline_axis + " [" + axis_units + "]")
     plt.ylabel('Directionality [%]')
 
-    plt.title('Directionality for TE mode' )
+    #Set the title
+    plt.title(graph_title)
     plt.show()
 
+    #Return the results
     return D
     
 
 
 
-def scatteringEff(Pin, Lr, Lt):
-    
-    DC = np.arange(0.1,0.96,0.05)
+def scatteringEff(Pin = 0, Lr = 0, Lt =  0, xline = 0, xline_axis = "", axis_units = "", graph_title = "Scattering efficiency"):
+    '''
+    Calculates the scattering efficiency as a numpy array. \n
+
+    Pin: Input power as selected for simulations. 
+    Can be any type as long as it satisfies the equations below.\n
+
+    Lr: ARRAY. Reflected power/reflection loss obtained from simulations. 
+    Default value is 0. Can be of any type as long as it satisfies matplotlib.pyplot.\n
+
+    Lt: ARRAY. Power transmitted/transmission loss obtained from simulations.
+    Can be of any type as long as it satisfies matplotlib.pyplot. Default value is 0. 
+    Can be of any type as long as it satisfies matplotlib.pyplot.\n
+
+    xline: ARRAY of values for x axis. Obligatory argument. Can be of any type as long as it satisfies matplotlib.pyplot.\n 
+
+    xline_axis: STRING. Title of the x axis. Default value is an empty string.\n
+
+    axis_units: STRING. Units to be displayed after axis title. Default value is an empty string.\n
+
+    graph_title: STRING. Default value is "Directionality".
+    '''
+
+
     SE = (Pin  - Lt - Lr)/Pin
+    
     #Plot the results in %
-
     plt.figure()
+    plt.plot(xline, SE*100, marker='^', linewidth = 2)
 
-    plt.plot(DC, SE*100, marker='^', linewidth = 2)
+    #Set the title
+    plt.title(graph_title)
 
-    plt.xlabel('Duty cycle [-]')
+    #Set the axes
+    plt.xlabel(xline_axis + " [" + axis_units + "]")
     plt.ylabel('Scattering efficiency [%]')
+
     plt.show()
 
+    #Return the result
     return SE
     
 
 
-def couplingEff(D, SE, O):
+def couplingEff(D, SE, O, xline = 0, xline_axis = "", axis_units = "", graph_title = "Coupling efficiency"):
+    '''
+    Calculates the scattering efficiency as a numpy array. \n
+
+    D: ARRAY. Directionality. Can be obtained from directionality method. 
+    Can be any type as long as it satisfies the equation below.\n
+
+    SE: ARRAY. Scattering efficiency. Can be obtained from scatteringEff method. 
+    Can be any type as long as it satisfies the equation below.\n
+
+    O: ARRAY. Overlap integral. Obtained from simulations.  
+    Can be any type as long as it satisfies the equation below.\n
+
+    xline: ARRAY of values for x axis. Obligatory argument. Can be of any type as long as it satisfies matplotlib.pyplot.\n 
+
+    xline_axis: STRING. Title of the x axis. Default value is an empty string.\n
+
+    axis_units: STRING. Units to be displayed after axis title. Default value is an empty string.\n
+
+    graph_title: STRING. Default value is "Directionality".
+    '''
 
     CE = SE*D*O
 
     #Plot the results in %
     plt.figure()
+    plt.plot(xline, CE*100, marker='^', linewidth = 2, color =  'blue')
+    
+    #Set the title
+    plt.title(graph_title)
 
-    plt.plot(DC, CE*100, marker='^', linewidth = 2, color =  'blue')
-
-    plt.xlabel('Duty cycle [-]')
+    #Set the axes
+    plt.xlabel(xline_axis + " [" + axis_units + "]")
     plt.ylabel('Coupling efficiency [%]')
+
+    #Plot the threshold line
     plt.axhline(50, linestyle = '--', color = 'black', label = '50% threshold')
+    
+    #Display the legend and show
     plt.legend()
     plt.show()
+    
+    #Return the results
     return CE
 
 
+#Raw data from simulations. Get overlap from matlab. 
 Reflection = {
             'TE_1310':np.array([0.0920, 0.1525, 0.2172, 0.2203, 0.2082, 0.1818, 0.2092, 0.2061, 0.1460, 0.0613, 0.0286, 0.0299, 0.0243, 0.0251, 0.0240, 0.0606, 0.0094, 0.0121]),
             'TM_1310':np.array([0.1035, 0.1258, 0.0068, 0.0459, 0.0229, 0.4109, 0.3859, 0.1312, 0.0724, 0.0771, 0.0456, 0.0658, 0.1559, 0.2091, 0.1889, 0.1312, 0.0730, 0.0290])
+            
             }
 
 Transmission = {
@@ -89,51 +166,36 @@ Field_overlap = {
             'TM_1310':np.array([0.0925, 0.0968, 0.1259, 0.1449, 0.1469, 0.4921, 0.4912, 0.4871, 0.4064, 0.3009, 0.4796, 0.2882, 0.3347, 0.3952, 0.4168, 0.4097, 0.3732, 0.3127])
     }
 
-DC = np.arange(0.1,0.96,0.05)
-
-#Calculate Directionality and Scattering for TE mode efficiency in %
-SE_TE = scatteringEff (1, Reflection['TE_1310'], Transmission['TE_1310'])
-D_TE = directionality('Down' ,Power_up['TE_1310'], Power_down['TE_1310'])
-
-#Calculate coupling efficiency in %
-Coupling_efficiency_TE = couplingEff(D_TE, SE_TE, Field_overlap['TE_1310'])
-
-SE_TM = scatteringEff(1, Reflection['TM_1310'], Transmission['TM_1310'])
-D_TM = directionality('Down' ,Power_up['TM_1310'], Power_down['TM_1310'])
-Coupling_efficiency_TM = couplingEff(D_TM, SE_TM, Field_overlap['TM_1310'])
 
 
 
-#Store the results as dict
-TE_1310 = {'DC':DC,
-           'Scattering_efficiency':SE_TE*100,
-           'Directionality':D_TE*100,
-           'Field_overlap':Field_overlap['TE_1310']*100,
-           'Coupling_efficiency':Coupling_efficiency_TE*100}
+#Raw data
+Single_etch = {
+'wavelength':np.arange(1.27,1.35, 0.01),
+'R':np.array([0.0839, 0.0726, 0.2107, 0.0827, 0.0547, 0.1022, 0.0709, 0.0400, 0.0798]),
+'T':np.array([0.0050, 0.0080, 0.0026, 0.0095, 0.0093, 0.1258, 0.0110, 0.0132, 0.0119]),
+'Up':np.array([0.5453, 0.5647, 0.5206, 0.6269, 0.6769, 0.6552, 0.6441, 0.6857, 0.6446]),
+'Down':np.array([0.3289, 0.3173, 0.2347, 0.2456, 0.2402, 0.2085, 0.2442, 0.2308, 0.2355]),
+'Overlap':np.array([0.8409, 0.7898, 0.8869, 0.8149, 0.8038, 0.8100, 0.77420, 0.7690, 0.7316])
+}
 
-TM_1310 = {'DC':DC,
-           'Scattering_efficiency':SE_TM*100,
-           'Directionality':D_TM*100,
-           'Field_overlap':Field_overlap['TM_1310']*100,
-           'Coupling_efficiency':Coupling_efficiency_TM*100}
 
-#Import pandas package 
-import pandas as pd
+#Calculate scattering efficiency and specify wavelength as an argument for x axis.
+single_SE = scatteringEff(1,Single_etch['R'], Single_etch['T'], Single_etch['wavelength'], "Wavelength", "nm")
 
-#Create a Dataframe from the results
-Grating_efficiency_TE = pd.DataFrame(TE_1310)
-Grating_efficiency_TM = pd.DataFrame(TM_1310)
-print(Grating_efficiency_TE.to_string())
-print(Grating_efficiency_TM.to_string())
+#Calculate directionality and specify wavelength as an argument for x axis.
+single_Dir = directionality('Up', Single_etch['Up'], Single_etch['Down'], Single_etch['wavelength'], "Wavelength", "nm")
 
+#Calculate coupling efficiency and specify wavelength as an argument for x axis.
+single_CE = couplingEff(single_Dir, single_SE, Single_etch['Overlap'], Single_etch['wavelength'], "Wavelength", "nm")
+
+
+
+#Plot the coupling efficiency in log scale
 plt.figure()
-plt.plot(DC, Grating_efficiency_TE['Coupling_efficiency'], marker='^', linewidth = 2, color = 'blue', label = 'TE')
-plt.plot(DC, Grating_efficiency_TM['Coupling_efficiency'],  marker='^', linewidth = 2, color = 'red', label = 'TM')
-plt.axhline(50, linestyle = '--', color = 'black',label = '50% threshold')
-plt.xlabel('Duty cycle')
+plt.plot(Single_etch['wavelength'], 10*np.log10(single_CE), marker='^', linewidth = 2, color =  'blue')
+plt.xlabel('Wavelength [nm]')
 plt.ylabel('Coupling efficiency [dB]')
+plt.axhline(-1, linestyle = '--', color = 'black', label = '-1dB threshold')
 plt.legend()
 plt.show()
-
-
-
