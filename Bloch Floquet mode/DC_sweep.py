@@ -22,8 +22,8 @@ def directionality(Dir = 'Up', Pup = 0, Pdown = 0, xline = 0, xline_axis = "",  
 
     graph_title: STRING. Default value is "Directionality".
     '''
-    DC = np.arange(0.1,0.96,0.05)
-
+    
+    #Calculations of directionalities themselves
     if Dir == 'Up':
         D = Pup/(Pdown + Pup)
     elif Dir == 'Down':
@@ -72,7 +72,7 @@ def scatteringEff(Pin = 0, Lr = 0, Lt =  0, xline = 0, xline_axis = "", axis_uni
     graph_title: STRING. Default value is "Directionality".
     '''
 
-
+    #Calculation of scattering efficiency itself
     SE = (Pin  - Lt - Lr)/Pin
     
     #Plot the results in %
@@ -95,7 +95,7 @@ def scatteringEff(Pin = 0, Lr = 0, Lt =  0, xline = 0, xline_axis = "", axis_uni
 
 def couplingEff(D, SE, O, xline = 0, xline_axis = "", axis_units = "", graph_title = "Coupling efficiency"):
     '''
-    Calculates the scattering efficiency as a numpy array. \n
+    Calculates the couplingg efficiency as a numpy array. \n
 
     D: ARRAY. Directionality. Can be obtained from directionality method. 
     Can be any type as long as it satisfies the equation below.\n
@@ -115,6 +115,7 @@ def couplingEff(D, SE, O, xline = 0, xline_axis = "", axis_units = "", graph_tit
     graph_title: STRING. Default value is "Directionality".
     '''
 
+    #Calculation of coupling efficiency itself
     CE = SE*D*O
 
     #Plot the results in %
