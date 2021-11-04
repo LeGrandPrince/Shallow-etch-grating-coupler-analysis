@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>93eb8a68-a381-4f7a-a77e-5168536bc2ca</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Bloch_Floquet_mode.py</StartupFile>
+    <StartupFile>DC_sweep.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bloch_Floquet_mode.py" />
+    <Compile Include="DC_sweep.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

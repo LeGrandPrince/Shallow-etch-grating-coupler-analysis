@@ -51,10 +51,10 @@ def diffractionRegion(wavelength, n_bfm, n_cladd):
     TM_pitch_max = - wavelength / (n_cladd - TM)
 
     #Store the results in dictionary
-    DR = {'TE min': TE_pitch_min,
-          'TE max': TE_pitch_max,
+    DR = {'TE_min': TE_pitch_min,
+          'TE_max': TE_pitch_max,
           'TM_min': TM_pitch_min,
-          'TM max': TM_pitch_max,
+          'TM_max': TM_pitch_max,
           'DC': duty_cycle}
 
     #Create a DataFrame from dictionary and return it
@@ -71,7 +71,7 @@ wavelength = 1310
 
 #Call function to calculate Bloch-Floquet mode
 Bloch_Floquet = blochFloquetIndex(neff_tooth, neff_slab, DC)
-
+print(Bloch_Floquet)
 #Call function to calculate upper and lower boundaries of period for diffraction mode
 pitchRegion = diffractionRegion(wavelength, Bloch_Floquet, n_cladding)
 print(pitchRegion)
@@ -80,22 +80,22 @@ print(pitchRegion)
 plt.figure()
 
 #Plot the lower boundary
-plt.plot(pitchRegion.loc[:, 'DC'], pitchRegion.loc[:, 'TE min'], 'blue', label = 'Lower boundary', marker =  'v' )
+plt.plot(pitchRegion.loc[:, 'DC'], pitchRegion.loc[:, 'TM_min'], 'blue', label = 'Lower boundary', marker =  'v' )
 
 #Plot the upper boundary
-plt.plot(pitchRegion.loc[:, 'DC'], pitchRegion.loc[:, 'TE max'], 'red', label = 'Upper boundary', marker = '^' )
+plt.plot(pitchRegion.loc[:, 'DC'], pitchRegion.loc[:, 'TM_max'], 'red', label = 'Upper boundary', marker = '^' )
 
 #Set the labels
 plt.xlabel('Duty cycle [-]')
 plt.ylabel('Period [nm]')
 
 #Set the title
-plt.title('Regions of period for grating coupler in the diffraction mode')
+plt.title('Regions of period for grating coupler in the diffraction mode (TM)')
 
 #Fill the region between two boundaries
 plt.fill_between(pitchRegion.loc[:, 'DC'], 
-                 pitchRegion.loc[:, 'TE min'], 
-                 pitchRegion.loc[:, 'TE max'], 
+                 pitchRegion.loc[:, 'TM_min'], 
+                 pitchRegion.loc[:, 'TM_max'], 
                  label = 'Diffraction region', 
                  alpha = 0.3, 
                  facecolor = 'cyan')
