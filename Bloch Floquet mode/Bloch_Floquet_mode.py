@@ -41,14 +41,14 @@ def diffractionRegion(wavelength, n_bfm, n_cladd):
     duty_cycle = n_bfm.loc[:, 'DC']
     TE = n_bfm.loc[:, 'TE']
     TM = n_bfm.loc[:, 'TM']
-
+    print(TE, TM)
     #Calculate region boundaries for TE polarization   
     TE_pitch_min = wavelength / (TE + n_cladd)
-    TE_pitch_max = - wavelength / (n_cladd - TE)
+    TE_pitch_max = np.minimum((- wavelength / (n_cladd - TE)),(2*wavelength / (n_cladd + TE)))
 
     #Calculate region boundaries for TM polarization
     TM_pitch_min = wavelength / (TM + n_cladd)
-    TM_pitch_max = - wavelength / (n_cladd - TM)
+    TM_pitch_max = np.minimum(- wavelength / (n_cladd - TM),(2*wavelength / (n_cladd + TM)))
 
     #Store the results in dictionary
     DR = {'TE_min': TE_pitch_min,
@@ -80,22 +80,28 @@ print(pitchRegion)
 plt.figure()
 
 #Plot the lower boundary
-plt.plot(pitchRegion.loc[:, 'DC'], pitchRegion.loc[:, 'TM_min'], 'blue', label = 'Lower boundary', marker =  'v' )
+plt.plot(pitchRegion.loc[:, 'DC'], pitchRegion.loc[:, 'TE_min'], 'blue', label = 'TE Lower boundary', marker =  'v' )
 
 #Plot the upper boundary
-plt.plot(pitchRegion.loc[:, 'DC'], pitchRegion.loc[:, 'TM_max'], 'red', label = 'Upper boundary', marker = '^' )
+plt.plot(pitchRegion.loc[:, 'DC'], pitchRegion.loc[:, 'TE_max'], 'red', label = 'TE Upper boundary', marker = '^' )
+
+#Plot the lower boundary
+plt.plot(pitchRegion.loc[:, 'DC'], pitchRegion.loc[:, 'TM_min'], 'green', label = 'TM Lower boundary', marker =  'v' )
+
+#Plot the upper boundary
+plt.plot(pitchRegion.loc[:, 'DC'], pitchRegion.loc[:, 'TM_max'], 'magenta', label = 'TM Upper boundary', marker = '^' )
 
 #Set the labels
 plt.xlabel('Duty cycle [-]')
 plt.ylabel('Period [nm]')
 
 #Set the title
-plt.title('Regions of period for grating coupler in the diffraction mode (TM)')
+plt.title('Regions of period for grating coupler in the diffraction mode (TE)')
 
 #Fill the region between two boundaries
 plt.fill_between(pitchRegion.loc[:, 'DC'], 
-                 pitchRegion.loc[:, 'TM_min'], 
-                 pitchRegion.loc[:, 'TM_max'], 
+                 pitchRegion.loc[:, 'TE_min'], 
+                 pitchRegion.loc[:, 'TE_max'], 
                  label = 'Diffraction region', 
                  alpha = 0.3, 
                  facecolor = 'cyan')
