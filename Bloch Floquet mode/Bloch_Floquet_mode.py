@@ -41,14 +41,14 @@ def diffractionRegion(wavelength, n_bfm, n_cladd):
     duty_cycle = n_bfm.loc[:, 'DC']
     TE = n_bfm.loc[:, 'TE']
     TM = n_bfm.loc[:, 'TM']
-
+    print(TE, TM)
     #Calculate region boundaries for TE polarization   
     TE_pitch_min = wavelength / (TE + n_cladd)
-    TE_pitch_max = - wavelength / (n_cladd - TE)
+    TE_pitch_max = np.minimum((- wavelength / (n_cladd - TE)),(2*wavelength / (n_cladd + TE)))
 
     #Calculate region boundaries for TM polarization
     TM_pitch_min = wavelength / (TM + n_cladd)
-    TM_pitch_max = - wavelength / (n_cladd - TM)
+    TM_pitch_max = np.minimum(- wavelength / (n_cladd - TM),(2*wavelength / (n_cladd + TM)))
 
     #Store the results in dictionary
     DR = {'TE_min': TE_pitch_min,
