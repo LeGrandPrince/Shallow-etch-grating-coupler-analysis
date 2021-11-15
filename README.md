@@ -1,4 +1,4 @@
-# Bloch-Floquet-mode
+# Diffraction grating analysis
 
 Repository, up to date, consists of two python scripts. 
 
