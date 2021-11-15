@@ -37,7 +37,7 @@ def rawDataPlot(T, R, U, D, xline, xline_axis = '', axis_units = '', graph_title
 
 def directionality(Dir = 'Up', Pup = 0, Pdown = 0, xline = 0, xline_axis = "",  axis_units = "", graph_title = "Directionality"):
     '''
-    Calculates the directionality as a numpy array. \n
+    Calculates the directionality as a numpy array and plots the data. \n
 
     Dir: STRING. Specifies the direction. Must be Either "Up" or "Down".\n
 
@@ -89,7 +89,7 @@ def directionality(Dir = 'Up', Pup = 0, Pdown = 0, xline = 0, xline_axis = "",  
 
 def scatteringEff(Pin = 0, Lr = 0, Lt =  0, xline = 0, xline_axis = "", axis_units = "", graph_title = "Scattering efficiency"):
     '''
-    Calculates the scattering efficiency as a numpy array. \n
+    Calculates the scattering efficiency as a numpy array and plto the data. \n
 
     Pin: Input power as selected for simulations. Default value is 1
     Can be any type as long as it satisfies the equations below.\n
@@ -137,7 +137,7 @@ def scatteringEff(Pin = 0, Lr = 0, Lt =  0, xline = 0, xline_axis = "", axis_uni
 
 def couplingEff(D, SE, O, xline = 0, xline_axis = "", axis_units = "", graph_title = "Coupling efficiency"):
     '''
-    Calculates the couplingg efficiency as a numpy array. \n
+    Calculates the couplingg efficiency as a numpy array and plot the data \n
 
     D: ARRAY. Directionality. Can be obtained from directionality method. 
     Can be any type as long as it satisfies the equation below.\n
@@ -177,7 +177,7 @@ def couplingEff(D, SE, O, xline = 0, xline_axis = "", axis_units = "", graph_tit
     plt.ylabel('Coupling efficiency [%]')
 
     #Plot the threshold line
-    plt.axhline(79, linestyle = '--', color = 'black', label = '50% threshold')
+    plt.axhline(79, linestyle = '--', color = 'black', label = '79% threshold')
     
     #Display the legend and show
     plt.legend()
@@ -215,40 +215,40 @@ Field_overlap = {
     }
 
 
-#Shallow etch (Hw = 180nm, Hs = Hw/2) period sweep in region <0.41;0.65>nm raw data. Overlap from matlab. Cladding SiO2.
+#Shallow etch (Hw = 180nm, Hs = Hw/2) period sweep in region <0.41;0.78>nm raw data. Overlap from matlab. Cladding SiO2.
 
-Period = np.arange(0.41,0.66,0.02)
+Period = np.arange(0.37,0.8,0.02)
 
-R = {'TE':np.array([0.1087, 0.0781, 0.0403, 0.0293, 0.0358, 0.0208, 0.3232, 0.0178, 0.0156, 0.0084, 0.0245, 0.0160, 0.0087]),
+R = {'TE':np.array([0.3608, 0.2087, 0.1087, 0.0781, 0.0403, 0.0293, 0.0358, 0.0208, 0.3232, 0.0178, 0.0156, 0.0084, 0.0245, 0.0160, 0.0087, 0.01446, 0.0309,   0.0452,   0.0498,  0.0551,  0.1673, 0.5080]),
      'TM':np.array([0.7340, 0.3265, 0.3123, 0.1928, 0.0896, 0.0484, 0.0565, 0.0317, 0.0531, 0.0189, 0.0603, 0.0114, 0.0543])}
 
-T={'TE':np.array([0.0247, 0.0184, 0.0524, 0.0725, 0.0694, 0.0624, 0.0650, 0.0374, 0.0309, 0.0388, 0.0337, 0.0302, 0.0254]),
+T={'TE':np.array([0.0605, 0.0919, 0.0247, 0.0184, 0.0524, 0.0725, 0.0694, 0.0624, 0.0650, 0.0374, 0.0309, 0.0388, 0.0337, 0.0302, 0.0254, 0.0209,  0.0100,  0.0033,  0.0005, 0.0006,  0.0011, 0.0005]),
    'TM':np.array([0.3186, 0.5902, 0.3701, 0.4355, 0.4740, 0.5081, 0.5909, 0.5701, 0.4836, 0.4496, 0.4664, 0.5119, 0.5249])}
 
-Pu = {'TE':np.array([0.2330,  0.2016, 0.1418, 0.1413, 0.1657, 0.1881, 0.1095, 0.2025, 0.1919, 0.1755, 0.1567, 0.1469, 0.1470]),
+Pu = {'TE':np.array([0.0772, 0.1130, 0.2330,  0.2016, 0.1418, 0.1413, 0.1657, 0.1881, 0.1095, 0.2025, 0.1919, 0.1755, 0.1567, 0.1469, 0.1470,  0.1653,   0.1886,   0.2426,  0.2441, 0.2583, 0.2110, 0.1134]),
       'TM':np.array([0.0274, 0.0397, 0.1346, 0.1845, 0.1921, 0.2110, 0.1337, 0.1123, 0.1507, 0.1731, 0.1525, 0.1228, 0.1007])}
 
-Pd = {'TE':np.array([0.6232, 0.6811, 0.7273, 0.7118, 0.6767, 0.6748, 0.3671, 0.7018, 0.7198, 0.7320, 0.7391, 0.7632, 0.7726]),
+Pd = {'TE':np.array([0.5323, 0.5823, 0.6232, 0.6811, 0.7273, 0.7118, 0.6767, 0.6748, 0.3671, 0.7018, 0.7198, 0.7320, 0.7391, 0.7632, 0.7726, 0.7630,  0.7319,   0.6938,  0.6202, 0.6416,  0.5704, 0.3369]),
       'TM':np.array([0.0827, 0.1254, 0.2554, 0.2845, 0.3169, 0.2966, 0.2961, 0.3522, 0.3899, 0.4123, 0.3977, 0.4005, 0.3953]
 )}
 
-FO = {'TE':np.array([0.9182, 0.9112, 0.7828, 0.6798, 0.6547, 0.6547, 0.5478, 0.6977, 0.6752, 0.6540, 0.6528, 0.6519, 0.6660]), 
+FO = {'TE':np.array([0.9127, 0.7652, 0.9182, 0.9112, 0.7828, 0.6798, 0.6547, 0.6547, 0.5478, 0.6977, 0.6752, 0.6540, 0.6528, 0.6519, 0.6660, 0.7255, 0.7982, 0.8775, 0.8615, 0.8807, 0.8850, 0.8565]), 
      'TM':np.array([0.8315, 0.7551, 0.8378, 0.7944, 0.6908, 0.7219, 0.6900, 0.6202, 0.6764, 0.5893, 0.6098, 0.6034, 0.5914])
 }
 
 
 #Plot Transmission loss, return loss, up power and down power
-rawDataPlot(R['TE'], T['TE'], Pu['TE'], Pd['TE'], Period*1000, 'Period', 'nm')
+rawDataPlot(T['TE'][2:-1], R['TE'][2:-1], Pu['TE'][2:-1], Pd['TE'][2:-1], Period[2:-1]*1000, 'Period', 'nm')
 
 #Calculate scattering efficiency and plot scattering efficiency, return loss and transmission loss vs period.
-SE = scatteringEff(1, R['TE'], T['TE'], Period*1000, 'Period', 'nm')
+SE = scatteringEff(1, R['TE'][2:-1], T['TE'][2:-1], Period[2:-1]*1000, 'Period', 'nm')
 
 #Calculate directionality. Plot directionality with up power and down power vs. period
-D = directionality('Down', Pu['TE'], Pd['TE'], Period*1000, 'Period', 'nm')
+D = directionality('Down', Pu['TE'][2:-1], Pd['TE'][2:-1], Period[2:-1]*1000, 'Period', 'nm')
 
 #Calculate coupling efficiency. Plot coupling efficiency with scattering efficiency, directionality and 
 #field overlap vs. period. 
-CE = couplingEff(D, SE, FO['TE'], Period*1000, 'Period', 'nm')
+CE = couplingEff(D, SE, FO['TE'][2:-1], Period[2:-1]*1000, 'Period', 'nm')
 
 
 
