@@ -1,3 +1,5 @@
+DISCLAIMER: Some of the scripts methods results are possible to obtain from proffesional software (like field overlap). Freeware versions of the scripts show problems using these tools, so scripts are designed to address these issues.
+
 # Diffraction grating analysis
 
 Repository, up to date, consists of two python scripts. 
@@ -6,7 +8,7 @@ First, the Bloch-Floquet-mode finds Bloch-Floquet refractive indices and calcula
 
 Second - sweep calculates Scattering efficiency of grating, its Directionality and Coupling efficiency. Field overlap, up to date, has to be provided externally. 
 
-
+Coming next will be script
 
 # Use of the Bloch_Floquet_mode.py script
 
