@@ -1,9 +1,9 @@
-DISCLAIMER: Some of the scripts methods results are possible to obtain from proffesional software (like field overlap). Freeware versions of the software however show problems using these tools, so scripts are designed to address these issues.
-<br />
-NOTE: In order to work with these scripts, you need to have raw data from simulation software (author uses optiFDTD).
-<br />
-THIS REPO IS DESIGNED TO MAKE YOUR WORKFLOW BETTER. IT IMPLEMENTS METHODS WHICH ARE SIMPLE TO USE TO AUTOMATE RESULTS ANALYSIS BEFORE SIMULATIONS OR TO AUTOMATE COMPLETION AND CALCULATIONS WITH RESULTS FROM SIMULATIONS.
-<br />
+DISCLAIMER: Some of the scripts methods results are possible to obtain from proffesional software (like field overlap). Freeware versions of the software however show problems using these tools, so scripts are designed to address these issues.<br />
+
+NOTE: In order to work with these scripts, you need to have raw data from simulation software (author uses optiFDTD).<br />
+
+THIS REPO IS DESIGNED TO MAKE YOUR WORKFLOW BETTER. IT IMPLEMENTS METHODS WHICH ARE SIMPLE TO USE TO AUTOMATE RESULTS ANALYSIS BEFORE SIMULATIONS OR TO AUTOMATE COMPLETION AND CALCULATIONS WITH RESULTS FROM SIMULATIONS.<br />
+
 # Diffraction grating analysis
 
 Repository, up to date, consists of two python scripts. 
