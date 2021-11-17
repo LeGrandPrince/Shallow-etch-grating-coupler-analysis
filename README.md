@@ -38,7 +38,7 @@ but in this way:
 </p>
 
 <br />                            
-This way, excel will divide the data to columns the correct way. If you use spaces in labeling instead of underscoring, make sure to mark the labels in a distinct way.
+This way, excel will divide the data to columns the correct way. If you use spaces in labeling instead of underscoring, make sure to mark the labels in a distinct way. In short, when specifying dict keys, instead of spaces use underscores.
 
 # Use of the sweep.py script
 Script consists of 4 functions and is written to calculate coupling efficiency of any given grating coupler. Script, however expects simulation data to be written by hand. Extracted CSV file will also work. 
